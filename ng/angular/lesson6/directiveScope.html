@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+
+       var app =  angular.module('app',[]);
+
+        app.controller('indexCtrl',function($scope) {
+
+            $scope.name = '测试数据';
+
+            $scope.say = function(){
+                alert(123);
+            }
+        })
+
+        /*app.directive('hello',function(){
+            return {
+                scope:true,//继承父元素 创建一个子child scope
+                link:function(scope) {
+                    //scope为true 可以直接调用父scope的作用域方法
+                    scope.say();
+                }
+            }
+        })*/
+
+       /*app.directive('hello',function(){
+           return {
+               scope:false,//默认与当前controller使用同一块作用域
+               link:function(scope) {
+                   //scope为false scope == indexCtrl>scope
+                   scope.say();
+               }
+           }
+       })*/
+
+       /*app.directive('hello',function(){
+           return {
+               scope:{},//scope 为{}时 创建一个新的scope对象>$parent 为当前的ctrl的scope
+               link:function(scope) {
+                   //scope调用函数时,不会默认调用$parent的事件和对象属性
+                   console.info(scope.$parent.say());
+               }
+           }
+       })*/
+
+       app.directive('hello',function(){
+           return {
+               scope:{
+                   username:"=user", //绑定一个scope的变量
+                   age:"@age", //绑定一个字符串或数字
+                   say:'&go' //绑定一个scope的方法
+               },// = @ &
+               link:function(scope) {
+                   console.info("作用域",scope)
+                   /*console.info(scope.$parent.say());*/
+               }
+           }
+       })
+    </script>
+</head>
+<body ng-controller="indexCtrl">
+    <div hello user="name" age="18" go="say()"></div>
+</body>
+</html>

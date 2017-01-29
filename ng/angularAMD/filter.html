@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="aoo">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="public/js/angular/angular.min.js"></script>
+    <script>
+        var aoo = angular.module('aoo',[]);
+
+        aoo.run(function(){});
+
+        aoo.filter('nameSeq',function() {
+            return function(obj,arr1,arr2) {
+                return arr1+arr2+obj;
+            }
+        })
+
+        aoo.controller('indexCtrl',function($scope,$filter) {
+           $scope.price = 10000;
+           $scope.name = '王八蛋';
+            $scope.mon = 200;
+           $scope.money = $scope.price;
+           $scope.money = $filter('currency')($scope.money,'￥');
+            //yyy-mm-dd hh:mm
+            //yyyy/mm/dd hh:mm
+           $scope.data = $filter('date')(new Date(),'MM/dd/yyyy hh:mm');
+           $scope.show = function() {
+               console.info("原来的数据",$scope.price,$scope.money)
+           }
+    })
+
+    </script>
+</head>
+<body>
+<div ng-controller="indexCtrl">
+    <p>{{mon|currency:'$':0}}</p>
+   <p> {{price | currency:"USD$":0}}</p>
+   <p> {{price | currency:'@'}}</p>
+    <p>{{money}}</p>
+    <p>{{data}}</p>
+    <p>{{name|nameSeq:"first"}}</p>
+    <button ng-click="show()">显示</button>
+</div>
+
+</body>
+</html>

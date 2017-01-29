@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+
+       var app = angular.module('app',[]);
+        app.directive('hello',function() {
+            return {
+                scope:{},
+                replace:true,
+                template:'<div>你好,{{name}},<word></word></div>',
+                transclude:true,
+                controller:function($scope) {
+                    $scope.name = '陈家俊';
+                    this.say = function() {
+                        $scope.name = '周柳浩';
+                    }
+                }
+            }
+        }).directive('word',function(){
+            return {
+                scope:{
+                },
+                replace:true,
+                require:['?^hello','?demo'],
+                //^向上寻找对应的依赖>指令名称
+                //?在当前寻找 找不到匹配的元素后 返回一个null对象
+                template:'<p>点击事件</p>',
+                link:function(s,el,attr,controlls) {
+                    console.info(controlls[0].say())
+                }
+            }
+        })
+
+    </script>
+</head>
+<body >
+
+    <hello></hello>
+
+
+</body>
+</html>

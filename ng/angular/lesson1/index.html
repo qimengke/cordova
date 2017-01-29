@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ygApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.js"></script>
+    <script>
+        //第一步 对angular进行初始化
+        //使用ng进行编程 返回一个对象
+        var app = angular.module("ygApp",[]);
+        //添加一个控制器
+        app.controller("indexCtrl",function($scope) {
+            //$scope > 作用域 用来定义当前controller下所有的变量 函数
+            //MV显示的数据 必须放置在$scope下
+            $scope.name = "yangguang";
+            $scope.age = 18;
+            //var age = 18; 不会渲染到页面上
+            //M>V
+            //model 实体
+        })
+        app.controller('childCtrl',function($scope) {
+            $scope.firend = '杜英杰';
+        })
+        /*定义一个controller控制器的时候 自动创建一个$scope作用域*/
+        app.controller("secondCtrl",function($scope) {
+           /* $scope.age = 22;*/
+        })
+        app.controller('thirdCtrl',function($scope) {
+        })
+        /*
+        * 1.控制器与控制器之间 没有关联
+        * 2.controller可以包含子控制器
+        * 3.子控制器可以调用父元素的$scope内的变量
+        * 4.父元素不能调用子元素的$scope内部变量
+        * */
+    </script>
+</head>
+<body>
+    <div id="demo1" ng-controller="indexCtrl">
+        父控制器:{{name}}:{{age}}:{{name}}
+        <div ng-controller="childCtrl">
+            <span>子控制器:</span>{{firend}}:{{name}}
+        </div>
+    </div>
+
+    <div id="demo2" ng-controller="secondCtrl" >
+        {{name}}
+    </div>
+
+    <div id="demo3" ng-controller="thirdCtrl">
+        <input type="text" ng-model="username">
+        {{username}}
+    </div>
+
+</body>
+</html>

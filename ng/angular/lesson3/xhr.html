@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp',[]);
+
+        app.controller('indexCtrl',function($scope,$http) {
+
+            //url
+            var url = 'http://datainfo.duapp.com/shopdata/userinfo.php';
+
+            var data = {
+                status:"login",
+                userID:'18979687250',
+                password:'123123f'
+            }
+
+            $http({ method: 'get', url: url ,params:data })
+                    .then(function succ(e){
+                        console.info(e);
+                        //jq和原生  是返回值直接使用
+                        var data = e.data;
+                    },function error(error){
+                        console.info(error);
+                    });
+
+
+            /*$http({ method: 'post', url: url ,data:data })
+                    .then(function succ(e){
+                        console.info(e);
+                        //jq和原生  是返回值直接使用
+                        var data = e.data;
+                    },function error(error){
+                        console.info(error);
+                    })
+            $http.get(url,{params:data});
+            $http.post(url,data);
+                    */
+
+
+        })
+
+
+
+
+    </script>
+</head>
+<body ng-controller="indexCtrl">
+
+</body>
+</html>

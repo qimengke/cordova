@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+
+       var app =  angular.module('app',[]);
+
+       app.controller('indexCtrl',function($scope) {
+           $scope.userAge;
+       })
+
+       app.directive('ngAlter',function(){
+            return {
+                restrict:'EA',
+                scope:true,
+                link:function(scope,el,attr) {
+                    if(scope[attr.ngAlter]) {
+                        //如果存在 显示元素
+                        angular.element(el).css({
+                            display:'block'
+                        });
+                    } else {
+                        //否则隐藏
+                        angular.element(el).css({
+                            display:'none'
+                        });
+                    }
+                   /* console.info(scope,el,attr);*/
+                }
+            }
+        })
+    </script>
+</head>
+<body ng-controller="indexCtrl">
+<div ng-alter="userAge" >弹出框</div>
+</body>
+</html>

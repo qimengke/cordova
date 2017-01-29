@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.js"></script>
+    <script>
+        var app = angular.module('app',[]);
+
+        app.controller('indexCtrl', function($scope) {
+            $scope.userName = '123';
+        })
+        /*定义指令*/
+        app.directive('demo',function(){
+            return {
+                restrict:'E',//指令生效的位置 A标签属性 E element C css M 注释
+                template:"<div>你好,老表</div>",
+                replace:true
+                //templateUrl
+            }
+        })
+
+        //ng-header  在指令中没有 - 且第二个单词大写
+        app.directive('ngHeader',function() {
+            return {
+                restrict:'EA',//可以放置多个
+                template:'<div>我是老马<p ng-transclude></p></div>',
+                transclude:true, //是否嵌套原有的数据
+                scope:{}, //作用域 true false {}
+                link:function(scope,elemnt,attr) {
+                    //link为模板定义方法和属性
+                    //scope 当前模板的作用域
+                    //element绑定到的当前元素
+                    //attr 标签的属性
+                    //console.info("scope>true:",scope);
+                    //scope为true的情况下 创建一个子scope用来定义方法 变量 对象
+                    //console.info("scope>false:",scope);
+                    //scope为false 的情况下 与controller进行相关联
+                    //scope未定义时 默认为false
+                    console.info("scope>{}:",scope);
+                    //scope为true的情况下 继承父元素的scope生成一个子scope
+                    //你们工作中如何确保作用域分离???
+                }
+            }
+        })
+
+    </script>
+</head>
+<body ng-controller="indexCtrl">
+    <div demo></div>
+    <demo></demo>
+    <ng-header>走秀网</ng-header>
+
+
+    <div ng-if="userName">{{userName}}</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+/*        setTimeout(function(){
+            alert(123);
+        },0);
+        while(true){
+        }
+        alert(222);*/
+
+        //创建一个promise对象
+        var p = new Promise(function(resolve,reject) {
+            //ajax 获取数据 2s
+            var count = 0;
+            setTimeout(function() {
+                if(count == 0) {
+                    //成功
+                    resolve(123);
+                } else {
+                    //失败
+                    reject(222)
+                }
+            },2000);
+        });
+        console.info('承诺对象初始化完成');
+        //然后
+        p.then(function(e){
+            //成功
+            console.info(e);
+        },function(e) {
+            //失败
+            console.info(e);
+        })
+        console.info('承诺对象调用完成');
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

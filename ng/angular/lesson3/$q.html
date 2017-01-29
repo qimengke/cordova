@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp',[]);
+        app.controller('myCtrl',function($scope,$http,$q) {
+            //创建一个承诺延迟对象
+            var d = $q.defer();
+            setTimeout(function(){
+                var count = 0;
+                if(count==0) {
+                    //成功
+                    d.resolve();
+                } else {
+                    d.reject();
+                }
+            },2000)
+            d.promise.then(function(){alert('返回数据执行成功');},function() {
+                alert(234);
+            })
+        })
+    </script>
+</head>
+<body ng-controller="myCtrl">
+
+</body>
+</html>

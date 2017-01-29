@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+
+        //定义入口文件
+        //DOMCONTENTED 页面dom元素准备完毕 $(function(){});
+        var app = angular.module('ygApp',[]);//model
+
+        //定义控制器进行操作
+        app.controller('loginCtrl',function($scope) {
+            $scope.age = 18;
+
+          /*  var login= function(){
+                alert('触发函数')
+            }*/
+            $scope.login = function() {
+               console.info($scope.username);
+            }
+        })
+    </script>
+</head>
+<body ng-app="ygApp">
+    <div ng-controller="loginCtrl">
+        <span>用户名称</span>
+        <input type="text" id="username" ng-model="username">
+        <p ng-if="username.length>16 || username.length<6">用户名长度应为6~16位</p>
+        <p ng-show="username.length>16 || username.length<6">用户名长度应为6</p>
+        <span ng-bind="username"></span>
+        <p ng-if="age>0">年龄合适</p>
+        <button ng-click="login()">登录</button>
+    </div>
+</body>
+</html>

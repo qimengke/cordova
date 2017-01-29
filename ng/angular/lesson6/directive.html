@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+
+        var app = angular.module('app',[]);
+        app.controller('indexCtrl',function($scope) {
+
+        })
+
+        app.directive('hello',function() {
+            return {
+                template:'<div>测试信息<world>123</world></div>',
+                transclude:true,
+                controller:function($scope) {
+                    $scope.userName = '张三';
+                    $scope.add = function(){}
+                },
+                link:function(scope) {
+                }
+            }
+        })
+
+        app.directive('world',function() {
+            return {
+                template:'<span>{{userName}}</span>',
+                scope:{},
+                link:function(scope,el,attr) {
+                    console.info(scope.userName)
+                }
+            }
+        })
+
+
+    </script>
+</head>
+<body>
+<!-- 指令嵌套指令 -->
+<div hello>
+
+</div>
+
+
+</body>
+</html>

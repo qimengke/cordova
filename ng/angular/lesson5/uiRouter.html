@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>                                                                                                                                                                                                                                                                                                                                                          -                                        .
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-ui-router.min.js"></script>
+    <script>
+        /*路由模块功能*/
+        var app = angular.module('myApp',['ui.router']);
+        /*config 在程序执行之前进行配置
+         * 在config内部对路径进行配置
+        * 使用angular-ui-router引入的两个服务模块
+        * */
+
+        app.config(['$stateProvider','$urlRouterProvider',function($state,$urlRoute) {
+            $state.state("homeIndex",{ //绑定在页面的标签中 ui-sref使用
+                url:"/index", //绑定在页面的标签中 ui-sref自动绑定 href
+                templateUrl:"views/first.html" //在路由触发的时候 自动讲匹配的模板显示到ui-views中
+            }).state("second",{
+                url:"/second",
+                templateUrl:"views/second.html"
+            })
+            //默认的路由规则
+            $urlRoute.otherwise('/index')
+        }])
+        /*app.run 在程序执行后 执行一个公开方法*/
+        app.controller("indexCtrl",function($scope) {
+            $scope.name = "你好";
+        })
+    </script>
+</head>
+<body>
+<p>
+    <span ui-sref="homeIndex">第一个页面</span>
+    <span ui-sref="second">第二个页面</span>
+</p>
+<div ui-view=""></div>
+</body>
+</html>

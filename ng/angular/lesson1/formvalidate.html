@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+        var app = angular.module('myApp',[]);
+        app.controller('loginCtrl',function($scope) {
+        })
+    </script>
+</head>
+<body ng-app="myApp" ng-controller="loginCtrl">
+<form name="loginForm" novalidate >
+    <div>
+        <lable>用户名:</lable>
+        <input type="text" name="userName" ng-pattern="/1[873]\d{9}/" ng-minlength="6" ng-maxlength="16" ng-required="true" ng-model="name">
+       <!-- 如果表单输入框已经呗修改过了 并且验证未通过 -->
+        <div ng-if="loginForm.userName.$dirty && loginForm.userName.$invalid">
+            <!-- 用户名为空 -->
+            <div ng-if="loginForm.userName.$error.required">用户名不能为空</div>
+            <!-- 用户长度不合符 -->
+            <div  ng-if="loginForm.userName.$error.minlength||loginForm.userName.$error.maxlength">
+                用户名长度为6~16位
+            </div>
+            <div  ng-if="loginForm.userName.$error.pattern">
+                格式不对
+            </div>
+        </div>
+    </div>
+    <div>
+        <lable>密码</lable>
+        <input type="password" ng-minlength="6" ng-maxlength="16" ng-required="" ng-model="pass">
+    </div>
+    <button type="button">提交</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-ui-router.min.js"></script>
+    <style>
+        .left {
+            float: left;
+            width:250px;
+            border:1px solid red;
+        }
+        .right {
+            float: left;
+            width:250px;
+            height:300px;
+            border:5px solid pink;
+        }
+    </style>
+    <script>
+       var app =  angular.module('app',['ui.router']);
+        app.config(function($stateProvider,$urlRouterProvider) {
+            $stateProvider.state("home",{
+                url:"/homeIndex",
+                templateUrl:"template/home.html"
+            }).state("home.user",{
+                url:'/user', // /homeIndex/user
+                views:{
+                    "home":{
+                        templateUrl:'template/home/user.html'
+                    }
+                }
+            }).state("home.mall",{
+                url:'/homeIndex/mall',
+                views:{
+                    "home":{
+                        templateUrl:'template/home/mall.html'
+                    }
+                }
+            });
+            $urlRouterProvider.otherwise('/homeIndex/user')
+        })
+
+
+    </script>
+</head>
+<body>
+<div ui-view=""></div>
+</body>
+</html>

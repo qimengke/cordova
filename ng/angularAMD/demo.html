@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="public/js/angular/angular.min.js"></script>
+    <script>
+
+        //用户修改
+        /* url:/user/update
+            name
+            pass
+            {name:"":pass:""}
+            */
+        //用户增加
+        /*
+        *   url: /use/add
+        *   username
+        *   userpass
+        *  {username:"",upass:""}
+        * */
+
+
+        var app = angular.module('app',['ui.router']);
+
+
+        app.run(function($stateProvider,$rootScope) {
+            $rootScope.arr = [1,1,1,1,1,1,1,1,1];
+
+            $stateProvider.state('demo',{
+                url:'/demo'
+            })
+
+        })
+
+        app.provider('User',function(){
+            this.$get = function() {
+            }
+        })
+
+        app.filter('filterSex',function() {
+            return function(o) {
+                return o?'男':'女';
+            }
+        })
+
+        app.filter('filterObj',function() {
+            return function(o) {
+                return o.name+ o.stuId;
+            }
+        })
+
+        app.controller('userCtrl',function($scope,$http) {
+            $scope.arr = ["王宝强","王宝强","王宝强","王宝强","王宝强"];
+            $scope.userName = '马蓉';
+
+            $scope.time = Date.now();
+            $scope.sex = 1;
+
+            document.getElementById('demo').onclick = function() {
+                alert(123)
+               $scope.$apply(function(){
+                   $scope.age = 99;
+               })
+            }
+
+            $scope.txt = '';
+
+            $scope.obj = {
+                name:'陈家俊',
+                stuId:'001'
+            }
+
+            $scope.$watch('txt',function(n,o) {
+                var patter = /^1[35789][0-9]{9}$/;
+                if(!patter.test(n)) {
+                    console.info('手机格式不正确')
+                }
+            })
+
+
+            /*setTimeout(function(){
+                alert(22);
+                $scope.$apply(function() {
+                    $scope.age = 25;
+                })
+            },1000)*/
+
+            /*
+            $http({
+                method:"get",
+                url:"",
+                 params:{}
+            })
+
+            $http({
+                method:"post",
+                url:"",
+                data:{}
+            })*/
+
+          //$http.get("url",{params:{向后台传递的参数}}})
+          //$http.post("url",{向后台传递的参数})
+
+
+        })
+
+    </script>
+</head>
+<body ng-controller="userCtrl">
+<div id="demo">11111111111</div>
+{{userName}}:{{age}}
+<input type="text" ng-model="txt">
+{{time | date}}
+{{sex | filterSex}}
+{{obj | filterObj}}
+    <div ng-repeat="i in arr track by $index">{{i}}</div>
+</body>
+</html>

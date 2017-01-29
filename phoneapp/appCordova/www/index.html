@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Hello World</title>
+        <style>
+            #photo {
+                width:100px;
+                height:100px;
+                border:2px solid red;
+                font-size:24px;
+            }
+            #myImage {
+                width:200px;
+                height:200px;
+                border:1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+            
+        <div id='photo'>拍照</div>
+
+        <img id='myImage' alt="">
+        
+        <div id='address'>地理定位</div>
+
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>

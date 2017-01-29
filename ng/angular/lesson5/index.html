@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-route/angular-route.js"></script>
+    <script>
+        /*路由模块功能*/
+        var app = angular.module('myApp',['ngRoute']);
+        /*config 在程序执行之前进行配置
+        * 在config内部对路径进行配置
+        * */
+        app.config(function($routeProvider) {
+            //对页面监听> 当页面地址链接跳转到/index
+            //
+            $routeProvider.when("/index",{
+                template:"<div>{{name}}我是第一个路由规则</div>",
+                controller:"indexCtrl"
+            }).when("/second",{
+                templateUrl:'views/second.html',
+                controller:function($scope) {
+                    $scope.name = "我不是很推荐";
+                }
+            }).otherwise({
+                redirectTo: '/index'//转发
+            })
+        })
+        /*app.run 在程序执行后 执行一个公开方法*/
+        app.controller("indexCtrl",function($scope) {
+            $scope.name = "你好";
+        })
+    </script>
+</head>
+<body>
+    <p>
+        <a href="#/index">第一个页面</a><a href="#/second">第二个页面</a>
+    </p>
+    <div ng-view=""></div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.left {
+	float: left;
+	width:200px;
+	height:400px;
+	border:1px solid red;
+}
+.right {
+	float: left;
+	width:350px;
+	height:400px;
+	border:1px solid green;
+}

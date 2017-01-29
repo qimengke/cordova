@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+        /*只会对第一个生效*/
+        var myapp = angular.module('myApp',[]);
+        myapp.controller('indexCtrl',function($scope) {
+            $scope.name = '我是外城的APP';
+        })
+        var lastApp = angular.module('lastApp',[]);
+        lastApp.controller('seconCtrl',function($scope) {
+            $scope.name = '我是内人的app';
+        })
+    </script>
+</head>
+<body>
+<div ng-controller="indexCtrl">
+    {{name}}
+</div>
+<div ng-app="lastApp">
+    <div ng-controller="seconCtrl">
+        {{name}}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(function() {
+            //scope 作用域
+            window.scope = {
+                name:'请输入用户名'
+            }
+
+            //使用js对对象进行监听
+            setInterval(function(){
+                //算法 对比两次值是否更改 如果没有更改 视图刷新
+                MtoV();
+            },200);
+            ///实体到视图
+            function MtoV(){
+                //监听一个值的对象 如果有更改的话 进行双向绑定的值刷新
+                // M>V
+                $('[qf-model]').each(function(){
+                    console.info(this)
+                    var modelName = $(this).attr('qf-model')
+                    $(this).val(scope[modelName]);
+                })
+                $('[qf-bind]').each(function(){
+                    console.info(this)
+                    var modelName = $(this).attr('qf-bind')
+                    $(this).html(scope[modelName]);
+                })
+            }
+
+            function VtoM(){
+                //V>M 如果有事件触发的时候 进行视图到MOdel的改变
+                //监听页面值改变 改变我们对应的实体
+                $('[qf-model]').on('keyup',function() {
+                    var modelName = $(this).attr('qf-model');
+                    scope[modelName] = $(this).val();
+                })
+            }
+
+            MtoV();
+            VtoM();
+
+
+
+
+
+        })
+        
+    </script>
+</head>
+<body>
+
+
+<input qf-model="name" type="text">
+<span qf-bind="name"></span>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/angular.min.js"></script>
+    <script>
+       var app =  angular.module('demoApp',[]);
+        //angular 全局方法 在程序运行时进行定义
+       //run方法没有scope
+       //$rootScope 全局作用域
+        app.run(function($rootScope) {
+            $rootScope.name = '你猜我猜你猜我猜不猜';
+        })
+
+        app.controller('indexCtrl',function($scope,$rootScope,$timeout,$interval) {
+
+
+
+           // var username = '你好';
+           // $scope.userName = '何林坤';
+            //数据的获取可能通过ajax 或 定时器进行获取
+
+            //数据双向绑定渲染 必须使用ng自带的服务或使用$apply
+            /*setTimeout(function(){
+                //必须使用$apply 强制将数据渲染到页面上
+                $scope.$apply(function() {
+                    //讲更改的数据渲染到页面的视图中
+                    $scope.userName = '何林坤';
+                })
+            },1000)*/
+
+            $timeout(function(){
+                $scope.userName = '何林坤';
+            },1000)
+            $scope.count=0;
+            $interval(function(){
+                $scope.count++;
+            },1000)
+        })
+
+       app.controller('secondCtrl',["$scope",'$filter',function($s,$f) {
+
+       }])
+
+
+    </script>
+</head>
+<body >
+<div ng-controller="indexCtrl">
+    {{userName}}：
+    {{age}}:{{count}}
+</div>
+<div ng-controller="secondCtrl"> </div>
+    {{name}}
+</body>
+</html>

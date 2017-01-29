@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/angular.min.js"></script>
+    <script>
+
+        var myapp = angular.module('dapp',[]);
+        myapp.controller('indexCtrl',function($scope) {
+            $scope.name = '我是外城的APP';
+        })
+        var lastApp = angular.module('sapp',[]);
+        lastApp.controller('seconCtrl',function($scope) {
+            $scope.name = '我是内人的app';
+        })
+
+        /*如果想让页面使用两个不同的ng-app解析*/
+        /*在程序初始化时*/
+        angular.element(document).ready(function() {
+            //如何在页面调用多个app
+            angular.bootstrap(document,['dapp','sapp']);
+        })
+    </script>
+</head>
+<body>
+<div ng-controller="indexCtrl">
+    {{name}}
+</div>
+<div>
+    <div ng-controller="seconCtrl">
+        {{name}}
+    </div>
+</div>
+
+</body>
+</html>
